@@ -34,9 +34,9 @@ class TweetRecognition:
         #remove numbers:
         without_numbers = re.sub(r"\d+", "", without_urls)
         #remove #
-        without_oct = re.sub(r"#", "", without_numbers)
+        without_symbols = re.sub('[!#&=_,<>~/.?\'\"\+\{\}~`]', "", without_numbers)
         #remove @
-        without_at = re.sub(r"@\S+", "", without_oct)
+        without_at = re.sub(r"@\S+", "", without_symbols)
         #make lower cases:
         words = without_at.lower().strip()
         # remove stop words
@@ -57,6 +57,9 @@ class TweetRecognition:
         self.count_vect = CountVectorizer(vocabulary=vocab)
         if flag == 1:
             text = self.preprocessing_of_text(text)
+            print (text)
+            if len(text) == 0:
+                return (-1)
             text = text.split()
         test_features_vect = self.count_vect.transform(text)
         predicted = clf.predict(test_features_vect)
@@ -92,3 +95,7 @@ class TweetRecognition:
 # text = "it was really interesting, but on the other hand i wouldnt recommend it to my friends - too specific"
 # a.train_clf()
 # print(a.get_predict(text))
+
+
+
+

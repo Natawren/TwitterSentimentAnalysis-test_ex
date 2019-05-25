@@ -12,6 +12,8 @@ def process():
     score = tweet.get_predict(text)
     if (score > 2):
         answer = "positive"
+    elif (score == -1):
+        answer = "unknown"
     else:
         answer = "negative"
     responses = jsonify({"result":answer})
