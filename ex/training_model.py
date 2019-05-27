@@ -33,7 +33,7 @@ class TweetRecognition:
         without_urls = re.sub(r"((www\.S+)|(http\S+))", "URL", raw_text)
         #remove numbers:
         without_numbers = re.sub(r"\d+", "", without_urls)
-        #remove #
+        #remove symbols
         without_symbols = re.sub('[!#&=_,<>~/.?\'\"\+\{\}~`]', "", without_numbers)
         #remove @
         without_at = re.sub(r"@\S+", "", without_symbols)
@@ -41,7 +41,6 @@ class TweetRecognition:
         words = without_at.lower().strip()
         # remove stop words
         stems = []
-        # stemming
         for i in words.split():
             if i not in self.stops:
                 stems.append(i)
