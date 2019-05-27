@@ -56,7 +56,6 @@ class TweetRecognition:
         self.count_vect = CountVectorizer(vocabulary=vocab)
         if flag == 1:
             text = self.preprocessing_of_text(text)
-            print (text)
             if len(text) == 0:
                 return (-1)
             text = text.split()
